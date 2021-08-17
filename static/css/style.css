@@ -1,11 +1,86 @@
-html {overflow-y: scroll}
-:root { --bgcolor: white; --fontcolor: #444; --linkcolor: #00e; --visitedcolor: #551a8b; --precolor: #fff; --prebgcolor: #000;}
-@media (prefers-color-scheme: dark) { :root { --bgcolor: black; --fontcolor: white; --linkcolor: #5bf; --visitedcolor: #ae5ee0; --precolor: #fff; --prebgcolor: #383838;}}
-body{max-width:800px;margin:40px auto;padding:0 10px;font:14px/1.5 monospace;color:var(--fontcolor); background: var(--bgcolor)}a:link{color: var(--linkcolor)}a:visited{color: var(--visitedcolor)}a:active{color: var(--visitedcolor)}h1,h2,h3{line-height:1.2}
-p > code{color: var(--precolor); background: var(--prebgcolor); padding:2px}
-pre{color: var(--precolor); background: var(--prebgcolor); padding:24px; overflow-x: auto}
-article{padding:24px 0}
-.center {display: block;margin-left: auto;margin-right: auto;width: 100%;}
-figcaption {color: #888; font: 12px/1.5 monospace; text-align: center;}
+/*THEME*/
+:root {
+    --font-ui: Inter, -apple-system, BlinkMacSystemFont, "Noto Sans Arabic", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Microsoft YaHei Light", sans-serif;
+    --font-serif: Literata, serif;
+    --font-mono: FreeMono, Courier;
+    --bgcolor: #fff;
+    --fontcolor: #444;
+    --linkcolor: #08f;
+    --visitedcolor: #084;
+    --precolor: #222;
+    --prebgcolor: #ddf;
+    --hrcolor: #80808080;
+    --highlightbgcolor: #ff0;
+    --highlightfontcolor: #000;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bgcolor: #282828;
+        --fontcolor: #dadada;
+        --linkcolor: #0af;
+        --visitedcolor: #0a4;
+        --precolor: #dadada;
+        --prebgcolor: #111;
+        --highlightbgcolor: #ff04;
+        --highlightfontcolor: #fff;
+    }
+}
+
+/*LAYOUT*/
+html {
+    --header-h-fb: 180px; /* the fallback value if JS is disabled */
+    --header-h: ;         /* what we will get and manipulate via JS */
+    --calculated-h: var(--header-h, var(--header-h-fb)); /* height of sticky header */
+    scroll-padding-top: var(--calculated-h);
+    overflow-y: auto;
+}
+body{max-width:800px;margin:40px auto;padding:0 10px;font:16px/1.5 var(--font-ui),sans-serif;color:var(--fontcolor); background: var(--bgcolor)}
+article{margin:1em 0 3em}
+header{border-bottom: double var(--hrcolor);margin: 0 -10px 0 -10px;padding: 1em 10px 0;position: sticky;top: 0;z-index: 1; backdrop-filter: blur(20px) saturate(180%) hue-rotate(270deg);}
+footer{border-top: double var(--hrcolor);margin-top: 2em}
+hr{border-style: solid; border-color: var(--hrcolor);}
+
+/*LINKS*/
+a:link{color: var(--linkcolor);text-decoration: none;word-break: break-word;}a:visited{color: var(--visitedcolor)}a:active{color: var(--visitedcolor)}a:hover{text-decoration: 1px underline double;}
+
+/*HEADINGS*/
+h1,h2,h3{line-height:1.2}
+
+/*PREFORMATTED TEXT*/
+pre{font-family: var(--font-mono),monospace;color: var(--precolor); background: var(--prebgcolor) !important;padding:1em; border-radius: .25em; overflow-x: auto;line-height: 1}
+code{font-family: var(--font-mono),monospace;color: var(--precolor); background: var(--prebgcolor); padding:1px .5em;border-radius: .25em;word-break: break-word;}
+pre>code{padding: initial;}
+code[data-lang]::after{content: attr(data-lang);position: absolute;top: 1em;right: 1em;text-transform: uppercase;font-family: var(--font-ui);font-size: small;font-weight: 600;opacity: .25}
+.highlight {position: relative}
+
+/*FIGURES*/
 figure {margin: auto}
+figcaption {color: #888; font: 12px/1.5 var(--font-ui),sans-serif; text-align: center}
 img {display: block; max-width: 100%; height: auto; margin: auto}
+
+/*OTHER MARKUPS*/
+abbr {text-decoration-thickness: 1px;cursor: help}
+kbd {
+    font-family: var(--font-ui);
+    font-size: 0.9375em;
+    padding: 2px 10px;
+    margin-left: .15em;
+    margin-right: .15em;
+    color: var(--fontcolor);
+    border-radius: 5px;
+    background: var(--prebgcolor);
+    box-shadow: 0 0 1px 1px var(--hrcolor), inset 0 0 0 1px var(--bgcolor);
+}
+@media (prefers-color-scheme: dark) {
+    kbd {
+        background: var(--bgcolor);
+        box-shadow: 0 0 1px 1px var(--prebgcolor), inset 0 0 0 1px var(--hrcolor);
+    }
+}
+
+/*ACCESSIBILITY*/
+@keyframes highlight { from { color: var(--highlightfontcolor);background-color: var(--highlightbgcolor);outline: 1px solid var(--highlightfontcolor); } to { color: var(--fontcolor);background-color: initial;outline: initial; } }
+:target {animation: highlight 3s}
+
+/*HELPER CLASSES*/
+.center {display: block;margin-left: auto;margin-right: auto;width: 100%;}

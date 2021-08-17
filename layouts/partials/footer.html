@@ -1,7 +1,15 @@
-<footer>
-	<p>&copy; {{ now.Year }} <a href="{{ .Site.BaseURL }}"><b>{{ if .Site.Copyright }}{{ .Site.Copyright }}{{ else }}{{ .Site.Title }}{{ end }}</b></a>.
-	{{- range .Site.Menus.footer }}
-	<a href="{{ .URL }}"><b>{{ .Name }}</b></a>.
-        {{- end }}
-	</p>
-</footer>
+
+    <footer>
+        <div>
+            <p>
+                &copy; {{ now.Year }} <a href="{{ .Site.BaseURL }}"><b>{{ if .Site.Copyright }}{{ .Site.Copyright }}{{ else }}{{ .Site.Title }}{{ end }}</b></a>.
+                Powered by <a href="https://gohugo.io">Hugo</a>.
+            {{- range first 1 .Site.Menus.footer }}
+                <a href="{{ .URL }}"><b>{{ .Name }}</b></a>
+            {{- end }}
+            {{- range after 1 .Site.Menus.footer }}
+                &middot; <a href="{{ .URL }}"><b>{{ .Name }}</b></a>
+            {{- end }}
+            </p>
+        </div>
+    </footer>

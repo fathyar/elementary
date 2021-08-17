@@ -1,0 +1,5 @@
+{{ if len .Inner }}
+    <abbr title="{{ index .Params 0 }}">{{ .Inner }}</abbr>
+{{ else }}
+    <abbr title="{{ index .Params 1 }}">{{ index .Params 0 }}</abbr>
+{{ end }}
