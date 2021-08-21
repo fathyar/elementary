@@ -1,0 +1,10 @@
+
+        <article>
+            <header>
+                <h1>{{ .Title }}</h1>
+                {{ partial "article/metadata.html" . }}
+            </header>
+            <div>
+                {{ .Content }}
+            </div>
+        </article>

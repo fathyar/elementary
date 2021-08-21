@@ -1,0 +1,17 @@
+{{ define "main" }}
+    <main id="main">
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}<p style="color: var(--pleadcolor); font-size: 1.25em;margin: -.75em 0 1em;">{{ .Description }}</p>{{ end }}
+    {{ .Content }}
+    <ul style="padding-inline-start:20px">
+        {{ range .Paginator.Pages }}
+            {{ if eq .Type "blog" }}
+                {{ .Render "li.blog" }}
+            {{ else }}
+                {{ .Render "li.fancy" }}
+            {{ end }}
+        {{ end }}
+    </ul>
+    {{ partial "pagination.html" . }}
+    </main>
+{{ end }}

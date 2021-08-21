@@ -6,12 +6,13 @@
     --bgcolor: #fafbfc;
     --fontcolor: #444;
     --linkcolor: #08f;
-    --visitedcolor: #084;
+    --visitedcolor: #008040;
     --precolor: #222;
-    --prebgcolor: #ddf;
+    --prebgcolor: #ddd;
     --hrcolor: #80808080;
     --highlightbgcolor: #ff0;
     --highlightfontcolor: #000;
+    --pleadcolor: #747474;
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -23,6 +24,7 @@
         --prebgcolor: #111;
         --highlightbgcolor: #ff04;
         --highlightfontcolor: #fff;
+        --pleadcolor: #9e9e9e;
     }
 }
 
@@ -36,9 +38,9 @@ html {
 }
 body{max-width:800px;margin:40px auto;padding:0 10px;font:16px/1.5 var(--font-ui),sans-serif;color:var(--fontcolor); background: var(--bgcolor)}
 article{margin:1em 0 3em}
-header{border-bottom: double var(--hrcolor);margin: 0 -10px 0 -10px;padding: 1em 10px 0;position: sticky;top: 0;z-index: 1; backdrop-filter: blur(20px) saturate(180%) hue-rotate(270deg);text-shadow: 0 0 .25em var(--bgcolor);}
+.site-banner{border-bottom: double var(--hrcolor);margin: 0 -10px 0 -10px;padding: 1em 10px 0;position: sticky;top: 0;z-index: 1; backdrop-filter: blur(20px) saturate(180%) hue-rotate(270deg);text-shadow: 0 0 .25em var(--bgcolor);}
 footer{border-top: double var(--hrcolor);margin-top: 2em}
-hr{border-style: solid; border-color: var(--hrcolor);}
+hr{border-style: dotted; border-color: var(--hrcolor);border-top: 0;}
 
 /*LINKS*/
 a:link{color: var(--linkcolor);text-decoration: none;word-break: break-word;}a:visited{color: var(--visitedcolor)}a:active{color: var(--visitedcolor)}a:hover{text-decoration: 1px underline double;}
@@ -83,6 +85,19 @@ blockquote::before {content: "";width: .2em;background-color: var(--hrcolor);bor
 /*ACCESSIBILITY*/
 @keyframes highlight { from { color: var(--highlightfontcolor);background-color: var(--highlightbgcolor);outline: 1px solid var(--highlightfontcolor); } to { color: var(--fontcolor);background-color: initial;outline: initial; } }
 :target {animation: highlight 3s}
+.skip {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden
+}
+.skip:focus {
+    position: static;
+    width: auto;
+    height: auto;
+}
 
 /*HELPER CLASSES*/
 .center {display: block;margin-left: auto;margin-right: auto;width: 100%;}

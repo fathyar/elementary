@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     /**
      * A workaround for sticky or fixed header overlapping targeted element
      **/
-    const siteHeader = document.querySelector("header");
+    const siteHeader = document.querySelector(".site-banner");
 
     const syncHeight = (height) => {
         document.querySelector("html").style.setProperty("--header-h", height+"px");
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     {
         'use strict';
 
-        var elSelector  = 'header',
+        var elSelector  = '.site-banner',
             element     = document.querySelector( elSelector );
 
         if( !element ) return true;

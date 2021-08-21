@@ -1,0 +1,24 @@
+<li>
+    <div>
+        <details>
+            <summary style="cursor: pointer;">    
+                <span style="font-family: var(--font-serif),serif;"><a href="{{ .RelPermalink }}">{{.Title }}</a></span>
+                <small>
+                {{ with .Params.categories }}
+                    &nbsp;&middot;&nbsp;
+                    {{ range first 1 . }}in <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+                    {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+                {{ end }}
+                {{ with .Params.tags }}
+                    &nbsp;&middot;&nbsp;
+                    {{ range first 1 . }}tagged: <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+                    {{- range after 1 . -}}, <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+                {{ end }}
+                </small>
+            </summary>
+            {{ with .Description }}<small><i><span style="color: var(--pleadcolor)">{{ . }}</span></i></small>{{ end }}
+            {{ with .Summary }}<br><small>{{.}}</small>{{ end }}
+            {{ if .Truncated }}<a href="{{ .Permalink }}">Read more&hellip;</a>{{ end }}
+        </details>
+    </div>
+</li>

@@ -1,0 +1,31 @@
+    {{/* shown: DATE, CATEGORIES, and TAGS */}}
+
+    {{ if or .Date .Params.tags .Params.categories }}
+    <p>
+        <b>
+        {{ $isAvailableDate := (.Date) }}
+        {{ $isAvailableCats := (.Params.categories) }}
+        {{ $isAvailableTags := (.Params.tags) }}
+        {{ if .Date }}
+            <time>
+                <abbr title='Posted on {{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}'>
+                    {{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
+                </abbr>
+            </time>
+        {{ end }}
+        {{ with .Params.categories }}
+            {{ range first 1 . }}{{ if $isAvailableDate }} &middot; {{ end }}In: <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+            {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+        {{ end }}
+        </b>
+        {{ with .Params.tags }}
+            {{ if or $isAvailableDate $isAvailableCats }} &middot; {{ end }}
+            {{ range first 1 . }}
+                Tagged: <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{- end -}}
+            {{- range after 1 . -}}
+                , <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{- end -}}
+        {{ end }}
+    </p>
+    {{ end }}

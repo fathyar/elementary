@@ -6,10 +6,6 @@ slug: {{ .Name | urlize }}
 type: cheatsheet
 categories: []
 tags: []
+description: ""
 summary: ""
 ---
-
-## Description
-
-## Cheat Sheet
-

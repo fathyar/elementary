@@ -1,0 +1,33 @@
+<li>
+    <div>
+    {{ if eq .Type "blog" }}
+        <details>
+            <summary style="cursor: pointer;">
+                <small><time>{{ .Date.Format (default "2006-01-02" .Site.Params.dateFmt) }}</time></small>
+                <span style="font-family: var(--font-serif);"><a href="{{ .RelPermalink }}">{{.Title }}</a></span>
+            </summary>
+            <small>
+                {{ with .Params.categories }}
+                    {{ range first 1 . }} in <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+                    {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+                    &nbsp;&middot; 
+                {{ end }}
+                {{ with .ReadingTime }}{{ . }} min read {{ end }}
+                {{ with .Params.tags }}
+                    &middot; tagged:
+                    {{ range first 1 . }}
+                        <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                    {{- end -}}
+                    {{- range after 1 . -}}
+                        , <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                    {{- end -}}
+                {{ end }}
+                <br>
+                <p>{{ .Summary }}</p>
+            </small>
+        </details>
+    {{ else }}
+        <a href="{{ .RelPermalink }}">{{.Title }}</a>
+    {{ end }}
+    </div>
+</li>

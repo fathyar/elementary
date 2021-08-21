@@ -1,0 +1,30 @@
+    {{ if or .Date .Params.tags .Params.categories }}
+    <p>
+        <b>
+        Posted
+        {{ if .Date }}
+            on <time>{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time>
+        {{ end }}
+        {{ with .Params.categories }}
+            {{ range first 1 . }} in <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+            {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+        {{ end }}
+        </b>
+        {{ with .WordCount }}
+            &middot; {{ . }} words
+        {{ end }}
+        {{ with .ReadingTime }}
+            &middot; {{ . }} minute read
+        {{ end }}
+        {{ with .Params.tags }}
+            <br>
+            Tags:
+            {{ range first 1 . }}
+                <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{- end -}}
+            {{- range after 1 . -}}
+                , <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            {{- end -}}
+        {{ end }}
+    </p>
+    {{ end }}
