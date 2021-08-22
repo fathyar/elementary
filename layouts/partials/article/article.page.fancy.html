@@ -1,9 +1,9 @@
 
-        <article>
+        <article id="content">
             <header>
-                <small>{{ partial "article/metadata.less.html" . }}</small>
-                <h1>{{ .Title }}</h1>
-                {{ with .Description }}<p style="color: var(--pleadcolor);font-size: 1.125em;margin: -.75em 0 0;">{{.}}</p><hr>{{ end }}
+                <h1 class="fancy-heading">{{ .Title }}</h1>
+                {{ with .Description }}<p style="color: var(--pleadcolor);font-size: 1.125em;margin: -.75em 0 0;">{{.}}</p>{{ end }}
+                <small>{{ partial "article/metadata.less.html" . }}</small><hr>
             </header>
             <div>
                 {{ .Content }}

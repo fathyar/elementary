@@ -1,0 +1,21 @@
+{{ if or .PrevInSection .NextInSection }}
+{{ $scratch := newScratch }}
+{{ with .Site.GetPage .Section }}{{ $scratch.Set "sectiontitle" .Params.sectionItemName }}{{ end }}
+<hr>
+<nav aria-label="Previous and next pages">
+    <ul class="prev-next">
+        {{with .PrevInSection}}
+            <li class="prev">
+                <span>&#x2190; <small>Previous {{ $scratch.Get "sectiontitle" }}:</small></span>
+                <a href="{{ .Permalink }}" aria-label="Previous page">{{ .Title }}</a>
+            </li>
+        {{end}}
+        {{with .NextInSection}}
+            <li class="next">
+                <span><small>Next {{ $scratch.Get "sectiontitle" }}:</small> &#x2192;</span>
+                <a href="{{ .Permalink }}" aria-label="Next page">{{ .Title }}</a>
+            </li>
+        {{end}}
+    </ul>
+</nav>
+{{ end }}

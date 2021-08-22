@@ -1,5 +1,7 @@
 {{ define "main" }}
-    <main id="main">
+    <main>
+        {{ partial "breadcrumb.html" . }}
         {{ partial "article/article.page.fancy.html" . }}
+        {{ partial "pagination.prev-next.in-section.html" . }}
     </main>
 {{ end }}

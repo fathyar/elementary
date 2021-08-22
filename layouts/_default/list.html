@@ -1,5 +1,5 @@
 {{ define "main" }}
-	<main id="main">
+	<main>
         {{ $pagetype := .Type }} <!--  Possible return values: blog, cheatsheet (the archetypes) -->
 		{{ if or .Title .Content }}
 		<div>
@@ -7,8 +7,9 @@
 			{{ with .Content }}<div>{{ . }}</div>{{ end }}
 		</div>
 		{{ end }}
+        {{ partial "breadcrumb.html" . }}
 
-		<ul style="padding-inline-start:20px">
+		<ul id="content" style="padding-inline-start:20px">
 			{{ range .Paginator.Pages }}
 				{{ if eq $pagetype .Type }} <!--  if list page  -->
 		        	{{ .Render "li" }}

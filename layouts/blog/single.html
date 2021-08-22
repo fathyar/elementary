@@ -1,6 +1,8 @@
 {{ define "main" }}
-    <main id="main">
+    <main>
+        {{ partial "breadcrumb.html" . }}
         {{ partial "article/article.page.blog.html" . }}
+        {{ partial "pagination.prev-next.in-section.html" . }}
     </main>
     {{ partial "sidebar.html" . }}
 {{ end }}

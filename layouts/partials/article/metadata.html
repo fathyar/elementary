@@ -1,8 +1,17 @@
+{{/*
+    if the param value is not equal to true (i.e. "false" or "not defined") then $displayMetadata is set to true,
+    else when the param value is "true" then $displayMetadata is set to false
+*/}}
+
+{{ $displayMetadata := (ne .Params.metadataHideAll true) }}
+{{ $displayDate := (ne .Params.metadataHideDate true) }}
+
+{{ if $displayMetadata }}
     {{ if or .Date .Params.tags .Params.categories }}
     <p>
         <b>
-        Posted
-        {{ if .Date }}
+        {{ if or $displayDate .Params.categories }}Posted {{ end }}
+        {{ if $displayDate }}
             on <time>{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time>
         {{ end }}
         {{ with .Params.categories }}
@@ -10,8 +19,9 @@
             {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
         {{ end }}
         </b>
-        {{ with .WordCount }}
-            &middot; {{ . }} words
+        {{ if .WordCount }}
+            {{ if or $displayDate .Params.categories }} &middot; {{ end }}
+            {{ .WordCount }} words
         {{ end }}
         {{ with .ReadingTime }}
             &middot; {{ . }} minute read
@@ -28,3 +38,4 @@
         {{ end }}
     </p>
     {{ end }}
+{{ end }}

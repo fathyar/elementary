@@ -1,8 +1,8 @@
 
-        <article>
+        <article id="content">
             <header>
-                <h1>{{ .Title }}</h1>
-                {{ partial "article/metadata.html" . }}
+                <h1 class="fancy-heading">{{ .Title }}</h1>
+                <small>{{ partial "article/metadata.html" . }}</small>
             </header>
             <div>
                 {{ .Content }}
