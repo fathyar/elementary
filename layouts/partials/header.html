@@ -1,13 +1,13 @@
 <header class="site-banner">
 	<a href="#content" class="skip">Skip to main content</a>
 	<div>
-		<p>
+		<p style="margin: 0;">
 			<b><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></b>
 			<span style="float: right;"><small><i>{{ .Site.Params.subtitle }}</i></small></span>
 		</p>
 	</div>
 	<nav aria-label="main">
-		<p>
+		<p style="margin: .5em 0;">
 			<a href="{{ .Site.Home.Permalink }}"><b>Home</b></a>
 			{{ with .Site.Menus.main }}{{ range . }}&middot; <a href="{{ .URL | relURL }}"><b>{{ .Name }}</b></a>
 			{{ end }}{{ end }}

@@ -1,7 +1,7 @@
-<li>
+<li style="list-style: none;">
     <div>
         <details>
-            <summary style="cursor: pointer;">
+            <summary style="cursor: pointer;list-style-position: outside;">
                 <small><time>{{ .Date.Format (default "2006-01-02" .Site.Params.dateFmt) }}</time></small>
                 <span style="font-family: var(--font-serif);"><a href="{{ .RelPermalink }}">{{.Title }}</a></span>
             </summary>
