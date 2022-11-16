@@ -10,24 +10,24 @@
 {{ if $displayMetadata }}
     {{ if or .Date .Params.tags .Params.categories }}
     <p>
-        <b>
+        
         {{ if and .Date $displayDate }}
             <abbr title='Posted on {{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}'><time>
             {{- .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) -}}
             </time></abbr>
         {{ end }}
         {{ with .Params.categories }}
-            {{ range first 1 . }}{{ if and $isAvailableDate $displayDate }}&nbsp;&middot;&nbsp;{{ end }} In: <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
-            {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+            {{ range first 1 . }}{{ if and $isAvailableDate $displayDate }}&nbsp;&middot;&nbsp;{{ end }} In: <b><a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b> {{- end -}}
+            {{ range after 1 . -}} , <b><a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b> {{- end -}}
         {{ end }}
-        </b>
+        
         {{ with .Params.tags }}
             {{ if or (and $isAvailableDate $displayDate) $isAvailableCats }}&nbsp;&middot; {{ end }}
             {{ range first 1 . }}
-                Tagged: <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                Tagged with: <b><a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b>
             {{- end -}}
             {{- range after 1 . -}}
-                , <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                , <b><a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b>
             {{- end -}}
         {{ end }}
     </p>

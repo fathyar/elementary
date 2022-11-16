@@ -3,7 +3,7 @@
             <header>
                 <small>{{ partial "article/metadata.html" . }}</small>
                 <h1 class="fancy-heading">{{ .Title }}</h1>
-                {{ with .Description }}<p style="color: var(--pleadcolor);font-size: 1.125em;margin: -.75em 0 0;">{{.}}</p><hr>{{ end }}
+                {{ with .Description }}<p class="par-lead">{{.}}</p><hr>{{ end }}
             </header>
             <div class="article-content">
                 {{ .Content }}

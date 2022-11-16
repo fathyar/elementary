@@ -68,10 +68,9 @@
 	{{ end }}
 
 	<!-- Stylesheet -->
-	<style type=text/css>body{font-family:Inter,sans-serif;}</style>
-	<link rel="stylesheet" href='{{ "css/style.css" | relURL }}'>
+	<link rel="stylesheet" href='{{ "index.css" | relURL }}?v={{ now.Unix }}'>
 	{{ range .Site.Params.customCSS -}}
-		<link rel="stylesheet" href="{{ . | relURL }}?rnd={{ now.Unix }}">
+		<link rel="stylesheet" href='{{ . | relURL }}?v={{ now.Unix }}'>
 	{{- end }}
 
 	<!-- RSS -->
@@ -85,6 +84,6 @@
 	{{ partial "footer" . }}
 
 	<!-- JS -->
-	<script src='{{ "js/script.js" | relURL }}'></script>
+	<script src='{{ "index.js" | relURL }}?v={{ now.Unix }}'></script>
 </body>
 </html>

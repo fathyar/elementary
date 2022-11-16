@@ -1,7 +1,7 @@
 {{ define "main" }}
     <main>
     <h1>{{ .Title }}</h1>
-    {{ if .Description }}<p style="color: var(--pleadcolor); font-size: 1.25em;margin: -.75em 0 1em;">{{ .Description }}</p>{{ end }}
+    {{ if .Description }}<p style="color: var(--pLeadColor); font-size: 1.25em;margin: -.75em 0 1em;">{{ .Description }}</p>{{ end }}
     {{ .Content }}
     {{ partial "breadcrumb.html" . }}
     <ul id="content" style="padding-inline-start:20px">

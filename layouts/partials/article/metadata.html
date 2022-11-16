@@ -9,16 +9,16 @@
 {{ if $displayMetadata }}
     {{ if or .Date .Params.tags .Params.categories }}
     <p>
-        <b>
+        
         {{ if or $displayDate .Params.categories }}Posted {{ end }}
         {{ if $displayDate }}
             on <time>{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time>
         {{ end }}
         {{ with .Params.categories }}
-            {{ range first 1 . }} in <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
-            {{ range after 1 . -}} , <a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}}
+            {{ range first 1 . }} in <b><a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b> {{- end -}}
+            {{ range after 1 . -}} , <b><a href="{{ "/cat/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b> {{- end -}}
         {{ end }}
-        </b>
+        
         {{ if .WordCount }}
             {{ if or $displayDate .Params.categories }} &middot; {{ end }}
             {{ .WordCount }} words
@@ -28,12 +28,12 @@
         {{ end }}
         {{ with .Params.tags }}
             <br>
-            Tags:
+            Tagged with:
             {{ range first 1 . }}
-                <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                <b><a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b>
             {{- end -}}
             {{- range after 1 . -}}
-                , <a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                , <b><a href="{{ "/tag/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></b>
             {{- end -}}
         {{ end }}
     </p>
