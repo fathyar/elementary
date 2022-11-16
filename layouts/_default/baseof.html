@@ -6,21 +6,56 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
 	<!-- Metadata -->
-	{{ if (eq .Title .Site.Title) }}
-		{{ with $title := .Title }}
+	{{ if .IsHome }}
+		{{ with $title := printf "%s" .Site.Title }}
 			<title>{{ . }}</title>
 			<meta property="og:title" content="{{ . }}">
 		{{ end }}
 	{{ else }}
-		{{ with $title := printf "%s — %s" .Title .Site.Title }}
+		{{ with $title := printf "%s" .Title }}
 			<title>{{ . }}</title>
 			<meta property="og:title" content="{{ . }}">
 		{{ end }}
 	{{ end }}
 	
-	{{ with .Site.Params.description }}
-		<meta name="description" content="{{ . }}">
-		<meta property="og:description" content="{{ . }}">
+	{{ if .IsHome }}
+		{{ with $desc := printf "%s" .Site.Params.description }}
+			<meta name="description" content="{{ . }}">
+			<meta property="og:description" content="{{ . }}">
+		{{ end }}
+	{{ else if eq .Kind "term" }}
+		{{ if eq .Data.Singular "tag" }}
+			{{ with $desc := printf "Archive for entries tagged with \"%s\"" .Data.Term }}
+				<meta name="description" content="{{ . }}">
+				<meta property="og:description" content="{{ . }}">
+			{{ end }}
+		{{ else if eq .Data.Singular "category" }}
+			{{ with $desc := printf "Archive for entries posted in %s %s" .Data.Term .Data.Singular }}
+				<meta name="description" content="{{ . }}">
+				<meta property="og:description" content="{{ . }}">
+			{{ end }}
+		{{ else }}
+			{{ with $desc := printf "Archive for entries in %s %s" .Data.Term .Data.Singular }}
+				<meta name="description" content="{{ . }}">
+				<meta property="og:description" content="{{ . }}">
+			{{ end }}
+		{{ end }}
+	{{ else if eq .Kind "taxonomy" }}
+		{{ with $desc := printf "Archive for %s" .Data.Plural }}
+			<meta name="description" content="{{ . }}">
+			<meta property="og:description" content="{{ . }}">
+		{{ end }}
+	{{ else }}
+		{{ if .Description  }}
+			<meta name="description" content="{{ .Description }}">
+			<meta property="og:description" content="{{ .Description }}">
+		{{ else if .Summary }}
+			<meta name="description" content="{{ .Summary }}">
+			<meta property="og:description" content="{{ .Summary }}">
+		{{ else }}
+			<meta name="description" content="{{ .Title }} on {{ .Site.Title }}">
+			<meta property="og:description" content="{{ .Title }} on {{ .Site.Title }}">
+		{{ end }}
 	{{ end }}
 	{{ with .Site.Params.author }}
 		<meta name="author" content="{{ . }}">
